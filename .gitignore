@@ -1,5 +1,6 @@
 projectFilesBackup/
 project/
+.sbtserver/
 
 # Created by https://www.gitignore.io/api/java,scala,playframework,sbt,intellij
 

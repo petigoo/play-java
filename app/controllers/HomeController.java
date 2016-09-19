@@ -8,7 +8,7 @@ import views.html.myIndex;
 public class HomeController extends Controller {
 
     public Result index() {
-        return ok(myIndex.render(new HelloWorld()));
+        return ok(myIndex.render(new HelloWorld("petigoo")));
     }
 
 }

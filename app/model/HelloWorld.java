@@ -4,8 +4,8 @@ public class HelloWorld {
 
     private String message;
 
-    public HelloWorld() {
-        message = "petigoo";
+    public HelloWorld(String message) {
+        this.message = message;
     }
 
     public String getMessage() {
