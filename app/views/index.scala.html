@@ -1,0 +1,49 @@
+@(countdown: model.Countdown)
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Countdown</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+          integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href='@routes.Assets.versioned("stylesheets/flipclock.css")'>
+    <link rel="stylesheet" type="text/css" href='@routes.Assets.versioned("stylesheets/main.css")'>
+</head>
+<body>
+<div id="clockbox">
+    <div id="time" class="clock"></div>
+</div>
+<div class="below">
+    <div id="text" class="text-center">@countdown.getText()</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src='@routes.Assets.versioned("javascripts/flipclock.min.js")'></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var date = new Date("@countdown.getTime()");
+        var now = new Date();
+
+        var diff = date - now;
+
+        if (diff/1000 > 0) {
+            var clock = $('.clock').FlipClock(diff/1000, {
+                countdown: true,
+                clockFace: 'DailyCounter',
+                callbacks: {
+                    stop: function() {
+                        location.reload();
+                    }
+                }
+            });
+        } else {
+            $('.clock').html("<span id='end'>It's time</span>");
+        }
+    });
+</script>
+</body>
+</html>
