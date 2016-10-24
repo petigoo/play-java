@@ -9,7 +9,8 @@ scalaVersion := "2.11.7"
 libraryDependencies ++= Seq(
   javaJdbc,
   cache,
-  javaWs
+  javaWs,
+  "org.mongodb" % "mongodb-driver" % "3.3.0"
 )
 
 fork in run := false
