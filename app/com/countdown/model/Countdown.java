@@ -1,4 +1,4 @@
-package model;
+package com.countdown.model;
 
 import java.util.UUID;
 

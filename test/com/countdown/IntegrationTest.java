@@ -1,3 +1,5 @@
+package com.countdown;
+
 import org.junit.*;
 
 import play.mvc.*;

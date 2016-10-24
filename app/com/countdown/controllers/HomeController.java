@@ -1,4 +1,4 @@
-package controllers;
+package com.countdown.controllers;
 
 import org.bson.Document;
 import org.joda.time.DateTime;
@@ -6,10 +6,10 @@ import org.joda.time.DateTime;
 import com.google.inject.Inject;
 import com.mongodb.client.MongoCollection;
 
-import model.Countdown;
+import com.countdown.model.Countdown;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.index;
+import com.countdown.views.html.index;
 
 public class HomeController extends Controller {
 

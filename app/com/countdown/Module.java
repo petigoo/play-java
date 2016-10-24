@@ -1,3 +1,5 @@
+package com.countdown;
+
 import org.bson.Document;
 
 import com.google.inject.AbstractModule;
