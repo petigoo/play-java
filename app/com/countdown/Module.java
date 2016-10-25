@@ -1,13 +1,13 @@
 package com.countdown;
 
-import org.bson.Document;
-
+import com.countdown.facade.CollectionToJacksonCollection;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.ServerAddress;
 
 import play.Configuration;
 
@@ -17,20 +17,27 @@ public class Module extends AbstractModule {
     public void configure() {
     }
 
-    private MongoClient createMongoClient() {
-        return new MongoClient();
+    private MongoClient createMongoClient(Configuration configuration) {
+        return new MongoClient(
+                new ServerAddress(configuration.getString("mongodb.host"), configuration.getInt("mongodb.port")));
     }
 
     @Provides
     @Singleton
-    public MongoDatabase getMongoDatabase(Configuration configuration) {
-        return createMongoClient().getDatabase(configuration.getString("mongodb.dbName"));
+    public DB getMongoDatabase(Configuration configuration) {
+        return createMongoClient(configuration).getDB(configuration.getString("mongodb.dbName"));
     }
 
     @Provides
     @Singleton
-    public MongoCollection<Document> getMongoCollection(MongoDatabase database, Configuration configuration) {
-        return database.getCollection(configuration.getString("mongodb.collection"));
+    public DBCollection getMongoCollection(DB db, Configuration configuration) {
+        return db.getCollection(configuration.getString("mongodb.collection"));
+    }
+
+    @Provides
+    @Singleton
+    public CollectionToJacksonCollection getCollectionToJacksonCollection(DBCollection collection) {
+        return new CollectionToJacksonCollection(collection);
     }
 
 }

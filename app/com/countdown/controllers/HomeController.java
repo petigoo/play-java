@@ -1,20 +1,26 @@
 package com.countdown.controllers;
 
-import org.bson.Document;
+import java.util.UUID;
+
 import org.joda.time.DateTime;
+import org.mongojack.JacksonDBCollection;
 
-import com.google.inject.Inject;
-import com.mongodb.client.MongoCollection;
-
+import com.countdown.facade.CollectionToJacksonCollection;
 import com.countdown.model.Countdown;
+import com.countdown.views.html.index;
+import com.google.inject.Inject;
+
 import play.mvc.Controller;
 import play.mvc.Result;
-import com.countdown.views.html.index;
 
 public class HomeController extends Controller {
 
+    private JacksonDBCollection<Countdown, UUID> collection;
+
     @Inject
-    private MongoCollection<Document> collection;
+    public HomeController(CollectionToJacksonCollection collectionToJacksonCollection) {
+        this.collection = collectionToJacksonCollection.getJacksonDBCollection();
+    }
 
     public Result index() {
         return ok(index.render(new Countdown(DateTime.parse("2016-10-07T17:10:00"), "to PUBlin-IRAland")));

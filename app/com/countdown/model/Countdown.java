@@ -11,6 +11,7 @@ public class Countdown {
     String text;
 
     public Countdown(DateTime time, String text) {
+        this._id = UUID.randomUUID();
         this.time = time;
         this.text = text;
     }

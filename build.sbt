@@ -10,7 +10,8 @@ libraryDependencies ++= Seq(
   javaJdbc,
   cache,
   javaWs,
-  "org.mongodb" % "mongodb-driver" % "3.3.0"
+  "org.mongodb" % "mongo-java-driver" % "3.3.0",
+  "org.mongojack" % "mongojack" % "2.6.1"
 )
 
 fork in run := false
