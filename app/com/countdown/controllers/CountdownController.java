@@ -28,9 +28,9 @@ public class CountdownController extends Controller {
         this.mapper = mapper;
     }
 
-    public Result show(String id) {
+    public Result show(String id) throws JsonProcessingException {
         LOG.info("show with id: " + id);
-        return ok(countdownFacade.search(id));
+        return ok(mapper.writeValueAsString(countdownFacade.search(id)));
     }
 
     public Result add() throws JsonProcessingException {

@@ -2,6 +2,7 @@ package com.countdown.facade;
 
 import java.util.UUID;
 
+import com.mongodb.BasicDBObject;
 import org.mongojack.JacksonDBCollection;
 import org.mongojack.ObjectId;
 import org.mongojack.WriteResult;
@@ -22,9 +23,10 @@ public class CountdownFacade {
         this.collection = collectionToJacksonCollection.getJacksonDBCollection();
     }
 
-    public String search(String id) {
+    public Countdown search(String id) {
         LOG.info("search");
-        return String.valueOf(collection.count());
+        return collection.findOne(new BasicDBObject("_id", id));
+//        return String.valueOf(collection.count());
     }
 
     public UUID insert(Countdown countdown) {

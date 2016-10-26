@@ -4,6 +4,7 @@
 
 GET     /                           com.countdown.controllers.HomeController.index
 GET     /count                      com.countdown.controllers.HomeController.getNumberOfDocuments
+GET     /show/:id                   com.countdown.controllers.CountdownController.show(id)
 POST    /add                        com.countdown.controllers.CountdownController.add
 
 # Map static resources from the /public folder to the /assets URL path
