@@ -1,24 +1,24 @@
 package com.countdown.facade;
 
+import org.mongojack.JacksonDBCollection;
+import org.mongojack.ObjectId;
+
 import com.countdown.model.Countdown;
 import com.google.inject.Inject;
 import com.mongodb.DBCollection;
-import org.mongojack.JacksonDBCollection;
-
-import java.util.UUID;
 
 public class CollectionToJacksonCollection {
 
     private DBCollection collection;
-    private JacksonDBCollection<Countdown, UUID> jacksonDBCollection;
+    private JacksonDBCollection<Countdown, ObjectId> jacksonDBCollection;
 
     @Inject
     public CollectionToJacksonCollection(DBCollection collection) {
         this.collection = collection;
-        this.jacksonDBCollection = JacksonDBCollection.wrap(collection, Countdown.class, UUID.class);
+        this.jacksonDBCollection = JacksonDBCollection.wrap(collection, Countdown.class, ObjectId.class);
     }
 
-    public JacksonDBCollection<Countdown, UUID> getJacksonDBCollection() {
+    public JacksonDBCollection<Countdown, ObjectId> getJacksonDBCollection() {
         return jacksonDBCollection;
     }
 }

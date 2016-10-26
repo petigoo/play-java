@@ -1,30 +1,42 @@
 package com.countdown.model;
 
+import java.util.Date;
 import java.util.UUID;
-
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
 
 public class Countdown {
     UUID _id;
-    DateTime time;
+    Date time;
     String text;
 
-    public Countdown(DateTime time, String text) {
-        this._id = UUID.randomUUID();
-        this.time = time;
-        this.text = text;
+    public Countdown() {
     }
 
     public UUID get_id() {
         return _id;
     }
 
-    public String getTime() {
-        return DateTimeFormat.forPattern("MMMM dd, yyyy HH:mm:ss").print(time);
+    public void set_id(UUID _id) {
+        this._id = _id;
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
     }
 
     public String getText() {
         return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    @Override
+    public String toString() {
+        return "Countdown{" + "_id=" + _id + ", time=" + time + ", text='" + text + '\'' + '}';
     }
 }
