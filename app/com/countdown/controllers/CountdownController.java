@@ -1,6 +1,5 @@
 package com.countdown.controllers;
 
-import java.text.SimpleDateFormat;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -21,10 +20,12 @@ public class CountdownController extends Controller {
     private static final Logger LOG = LoggerFactory.getLogger(CountdownController.class);
 
     private CountdownFacade countdownFacade;
+    private ObjectMapper mapper;
 
     @Inject
-    public CountdownController(CountdownFacade countdownFacade) {
+    public CountdownController(CountdownFacade countdownFacade, ObjectMapper mapper) {
         this.countdownFacade = countdownFacade;
+        this.mapper = mapper;
     }
 
     public Result show(String id) {
@@ -35,8 +36,6 @@ public class CountdownController extends Controller {
     public Result add() throws JsonProcessingException {
         JsonNode jsonNode = request().body().asJson();
         LOG.info(jsonNode.toString());
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"));
         Countdown countdown = mapper.treeToValue(jsonNode, Countdown.class);
         countdown.set_id(UUID.randomUUID());
         LOG.info(countdown.toString());
