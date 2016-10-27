@@ -1,24 +1,20 @@
 package com.countdown.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.Date;
-import java.util.UUID;
 
 public class Countdown {
-    UUID _id;
-    @JsonFormat(pattern = "MMMM dd, yyyy HH:mm:ss")
+    String _id;
     Date time;
     String text;
 
     public Countdown() {
     }
 
-    public UUID get_id() {
+    public String get_id() {
         return _id;
     }
 
-    public void set_id(UUID _id) {
+    public void set_id(String _id) {
         this._id = _id;
     }
 

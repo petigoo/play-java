@@ -1,10 +1,7 @@
 package com.countdown.facade;
 
-import java.util.UUID;
-
-import com.mongodb.BasicDBObject;
+import org.mongojack.DBQuery;
 import org.mongojack.JacksonDBCollection;
-import org.mongojack.ObjectId;
 import org.mongojack.WriteResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +13,7 @@ public class CountdownFacade {
 
     private static final Logger LOG = LoggerFactory.getLogger(CountdownFacade.class);
 
-    private JacksonDBCollection<Countdown, ObjectId> collection;
+    private JacksonDBCollection<Countdown, String> collection;
 
     @Inject
     public CountdownFacade(CollectionToJacksonCollection collectionToJacksonCollection) {
@@ -25,12 +22,16 @@ public class CountdownFacade {
 
     public Countdown search(String id) {
         LOG.info("search");
-        return collection.findOne(new BasicDBObject("_id", id));
-//        return String.valueOf(collection.count());
+        return collection.findOne(DBQuery.is("_id", id));
+        // return String.valueOf(collection.count());
     }
 
-    public UUID insert(Countdown countdown) {
-        WriteResult<Countdown, ObjectId> result = collection.insert(countdown);
+    public String insert(Countdown countdown) {
+        WriteResult<Countdown, String> result = collection.insert(countdown);
         return result.getSavedObject().get_id();
+    }
+
+    public void update(Countdown countdown) {
+        WriteResult<Countdown, String> result = collection.updateById(countdown.get_id(), countdown);
     }
 }

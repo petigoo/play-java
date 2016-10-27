@@ -1,7 +1,6 @@
 package com.countdown.facade;
 
 import org.mongojack.JacksonDBCollection;
-import org.mongojack.ObjectId;
 
 import com.countdown.model.Countdown;
 import com.google.inject.Inject;
@@ -10,15 +9,15 @@ import com.mongodb.DBCollection;
 public class CollectionToJacksonCollection {
 
     private DBCollection collection;
-    private JacksonDBCollection<Countdown, ObjectId> jacksonDBCollection;
+    private JacksonDBCollection<Countdown, String> jacksonDBCollection;
 
     @Inject
     public CollectionToJacksonCollection(DBCollection collection) {
         this.collection = collection;
-        this.jacksonDBCollection = JacksonDBCollection.wrap(collection, Countdown.class, ObjectId.class);
+        this.jacksonDBCollection = JacksonDBCollection.wrap(collection, Countdown.class, String.class);
     }
 
-    public JacksonDBCollection<Countdown, ObjectId> getJacksonDBCollection() {
+    public JacksonDBCollection<Countdown, String> getJacksonDBCollection() {
         return jacksonDBCollection;
     }
 }

@@ -1,7 +1,6 @@
 package com.countdown.controllers;
 
 import org.mongojack.JacksonDBCollection;
-import org.mongojack.ObjectId;
 
 import com.countdown.facade.CollectionToJacksonCollection;
 import com.countdown.model.Countdown;
@@ -12,7 +11,7 @@ import play.mvc.Result;
 
 public class HomeController extends Controller {
 
-    private JacksonDBCollection<Countdown, ObjectId> collection;
+    private JacksonDBCollection<Countdown, String> collection;
 
     @Inject
     public HomeController(CollectionToJacksonCollection collectionToJacksonCollection) {

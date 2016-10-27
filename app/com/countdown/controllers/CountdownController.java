@@ -34,11 +34,22 @@ public class CountdownController extends Controller {
     }
 
     public Result add() throws JsonProcessingException {
+        Countdown countdown = getPostedCountdown();
+        countdown.set_id(UUID.randomUUID().toString());
+        LOG.info(countdown.toString());
+        return ok(countdownFacade.insert(countdown));
+    }
+
+    private Countdown getPostedCountdown() throws JsonProcessingException {
         JsonNode jsonNode = request().body().asJson();
         LOG.info(jsonNode.toString());
-        Countdown countdown = mapper.treeToValue(jsonNode, Countdown.class);
-        countdown.set_id(UUID.randomUUID());
-        LOG.info(countdown.toString());
-        return ok(countdownFacade.insert(countdown).toString());
+        return mapper.treeToValue(jsonNode, Countdown.class);
+    }
+
+    public Result update(String id) throws JsonProcessingException {
+        Countdown countdown = getPostedCountdown();
+        countdown.set_id(id);
+        countdownFacade.update(countdown);
+        return ok();
     }
 }
