@@ -6,7 +6,7 @@ import org.mongojack.WriteResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.countdown.model.Countdown;
+import com.countdown.models.Countdown;
 import com.google.inject.Inject;
 
 public class CountdownFacade {

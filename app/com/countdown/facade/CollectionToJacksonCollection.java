@@ -2,7 +2,7 @@ package com.countdown.facade;
 
 import org.mongojack.JacksonDBCollection;
 
-import com.countdown.model.Countdown;
+import com.countdown.models.Countdown;
 import com.google.inject.Inject;
 import com.mongodb.DBCollection;
 

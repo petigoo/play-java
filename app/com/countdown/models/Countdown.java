@@ -1,9 +1,12 @@
-package com.countdown.model;
+package com.countdown.models;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 
 public class Countdown {
     String _id;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     Date time;
     String text;
 

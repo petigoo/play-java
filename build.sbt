@@ -14,4 +14,8 @@ libraryDependencies ++= Seq(
   "org.mongojack" % "mongojack" % "2.6.1"
 )
 
+libraryDependencies ++= Seq(
+  "org.mockito" % "mockito-core" % "2.2.9",
+  "org.assertj" % "assertj-core" % "3.5.2"
+)
 fork in run := false
