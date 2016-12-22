@@ -3,28 +3,24 @@ package com.countdown.controllers;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static play.mvc.Http.Status.OK;
 import static play.test.Helpers.contentAsString;
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.countdown.facade.CountdownFacade;
+import com.countdown.repository.CountdownRepository;
 import com.countdown.models.Countdown;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import play.mvc.Http;
 import play.mvc.Result;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -37,13 +33,9 @@ public class CountdownControllerTest {
     private static final String DATE_PATTERN = "yyyy-MM-dd'T'HH:mm:ss";
 
     @Mock
-    private CountdownFacade countdownFacadeMock;
+    private CountdownRepository countdownRepositoryMock;
     @Mock
     private ObjectMapper mapperMock;
-    @Mock
-    private Http.Request requestMock;
-    @Mock
-    private Http.RequestBody bodyMock;
 
     private Countdown countdown;
 
@@ -51,7 +43,7 @@ public class CountdownControllerTest {
 
     @Before
     public void setUp() throws ParseException {
-        underTest = new CountdownController(countdownFacadeMock, mapperMock);
+        underTest = new CountdownController(countdownRepositoryMock, mapperMock);
         countdown = getCountdown();
     }
 
@@ -66,7 +58,7 @@ public class CountdownControllerTest {
     @Test
     public void showShouldReturnWithOkStatusAndJsonValue() throws JsonProcessingException {
         // Given
-        when(countdownFacadeMock.search(anyString())).thenReturn(countdown);
+        when(countdownRepositoryMock.search(anyString())).thenReturn(countdown);
         when(mapperMock.writeValueAsString(any(Countdown.class))).thenReturn(JSON_VALUE_AS_STRING);
 
         // When
@@ -76,20 +68,5 @@ public class CountdownControllerTest {
         assertThat(result.status()).isEqualTo(OK);
         assertThat(contentAsString(result)).isEqualTo(JSON_VALUE_AS_STRING);
     }
-
-//    @Test
-//    public void addShouldReturnWithOkStatus() throws IOException {
-//        // Given
-//        when(countdownFacadeMock.insert(any(Countdown.class))).thenReturn(countdown.get_id());
-//        when(requestMock.body()).thenReturn(bodyMock);
-//        when(bodyMock.asJson()).thenReturn(new ObjectMapper().readTree("{\"text\":\"auto\",\"time\":\"2016-11-08T16:31:00\"}"));
-//        when(mapperMock.treeToValue(any(JsonNode.class), eq(Countdown.class))).thenReturn(countdown);
-//
-//        // When
-//        Result result = underTest.add();
-//
-//        // Then
-//        assertThat(result.status()).isEqualTo(OK);
-//    }
 
 }

@@ -1,6 +1,6 @@
 package com.countdown;
 
-import com.countdown.facade.CollectionToJacksonCollection;
+import com.countdown.repository.CollectionToJacksonCollection;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;

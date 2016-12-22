@@ -1,4 +1,4 @@
-package com.countdown.facade;
+package com.countdown.repository;
 
 import org.mongojack.JacksonDBCollection;
 

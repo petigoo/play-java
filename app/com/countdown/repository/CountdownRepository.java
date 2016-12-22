@@ -1,4 +1,4 @@
-package com.countdown.facade;
+package com.countdown.repository;
 
 import org.mongojack.DBQuery;
 import org.mongojack.JacksonDBCollection;
@@ -9,14 +9,14 @@ import org.slf4j.LoggerFactory;
 import com.countdown.models.Countdown;
 import com.google.inject.Inject;
 
-public class CountdownFacade {
+public class CountdownRepository {
 
-    private static final Logger LOG = LoggerFactory.getLogger(CountdownFacade.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CountdownRepository.class);
 
     private JacksonDBCollection<Countdown, String> collection;
 
     @Inject
-    public CountdownFacade(CollectionToJacksonCollection collectionToJacksonCollection) {
+    public CountdownRepository(CollectionToJacksonCollection collectionToJacksonCollection) {
         this.collection = collectionToJacksonCollection.getJacksonDBCollection();
     }
 
