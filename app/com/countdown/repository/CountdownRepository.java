@@ -23,7 +23,6 @@ public class CountdownRepository {
     public Countdown search(String id) {
         LOG.info("search");
         return collection.findOne(DBQuery.is("_id", id));
-        // return String.valueOf(collection.count());
     }
 
     public String insert(Countdown countdown) {
